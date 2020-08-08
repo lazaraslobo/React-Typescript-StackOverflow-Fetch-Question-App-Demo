@@ -25,6 +25,25 @@ export interface QAcompPropsInterface {
     "title": string 
 }
 
+interface interfaceBar{
+    iconName    :  string
+    text        ?: string|number 
+}
+
+const CreateQaInfoBar = (barProps : interfaceBar) =>{
+    return (
+        <Grid item xs={3} sm={4} md={4} lg={2} xl={2}>
+            <Grid {...options.contRowStartCenter}>
+                <Grid item xs={3}>
+                    <span className="material-icons WT">{barProps.iconName}</span>
+                </Grid>
+                <Grid item xs={3}>
+                    <RichText>{barProps.text}</RichText>
+                </Grid>
+            </Grid>
+        </Grid>
+    )
+}
 
 const QuestionAnswerCard = (props : QAcompPropsInterface) =>{
     return (
@@ -44,33 +63,9 @@ const QuestionAnswerCard = (props : QAcompPropsInterface) =>{
                 <CardTitle>``{props.title}``</CardTitle>
             </Grid>
             <Grid {...options.contRowStartCenter} className="QAinfoPanel">
-                <Grid item xs={3} sm={4} md={4} lg={2} xl={2}>
-                    <Grid {...options.contRowStartCenter}>
-                        <Grid item xs={3}>
-                            <span className="material-icons WT">comment</span>
-                        </Grid>
-                        <Grid item xs={3}>
-                            <RichText>{props.answer_count}</RichText>
-                        </Grid>
-                    </Grid>
-                </Grid>
-                <Grid item xs={3} sm={4} md={4} lg={2} xl={2}>
-                    <Grid {...options.contRowStartCenter}>
-                        <Grid item xs={3}>
-                            <span className="material-icons WT">remove_red_eye</span>
-                        </Grid>
-                        <Grid item xs={3}>
-                            <RichText>{props.view_count}</RichText>
-                        </Grid>
-                    </Grid>
-                </Grid>
-                <Grid item xs={3} sm={4} md={4} lg={2} xl={2}>
-                    <Grid {...options.contRowCenterCenter}>
-                        <Grid item xs={3}>
-                            <span className="material-icons WT">{props.is_answered ? 'check_circle' : 'close'}</span>
-                        </Grid>
-                    </Grid>
-                </Grid>
+                <CreateQaInfoBar {...{iconName : "comment", text : props.answer_count}}/>
+                <CreateQaInfoBar {...{iconName : "remove_red_eye", text : props.view_count}}/>
+                <CreateQaInfoBar {...{iconName : props.is_answered ? 'check_circle' : 'close'}}/>
             </Grid>
             {
                 props.tags.length ?
