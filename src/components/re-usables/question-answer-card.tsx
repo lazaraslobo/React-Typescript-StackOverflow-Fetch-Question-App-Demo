@@ -1,5 +1,5 @@
 import React from 'react';
-import {Wrapper, ProfileImage, RichText, CardTitle, ViewCount} from './cards.styled';
+import {Wrapper, ProfileImage, RichText, CardTitle} from './cards.styled';
 import {options} from '../Grid'
 import {Grid} from '@material-ui/core';
 

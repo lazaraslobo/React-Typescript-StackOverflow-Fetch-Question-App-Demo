@@ -9,9 +9,9 @@ import { QuestionAnswerCard, QAcompPropsInterface } from '../re-usables/question
 import { options } from '../Grid'
 import { Grid } from '@material-ui/core';
 
-type HocProps = ReturnType<typeof mapStateToProps & typeof mapDispatchToProps>;
+// type HocProps = ReturnType<typeof mapStateToProps & typeof mapDispatchToProps>;
 
-const FetchApiLoading = () => <h1>Fetching Stack API .... </h1>
+// const FetchApiLoading = () => <h1>Fetching Stack API .... </h1>
 
 let isApiFetching = false;
 
@@ -19,7 +19,7 @@ class HomeComponent extends React.Component<any, any>{
   constructor(props: any) {
     super(props);
     this.state = {
-      isApiFetching   : false
+      window   : {}
     }
   }
   componentDidMount() {
@@ -44,6 +44,8 @@ class HomeComponent extends React.Component<any, any>{
       if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight) return;
         let elemLength = (document.getElementsByClassName("stackQACard").length / 20)+1;
         props.getHomeScreenData(elemLength);
+      
+      document.getElementsByClassName("scroller-element")[0].innerHTML = "window.innerHeight + document.documentElement.scrollTop = "+window.innerHeight + document.documentElement.scrollTop + " ===== document.documentElement.offsetHeight "+ document.documentElement.offsetHeight;
     });
   }
 
@@ -66,7 +68,7 @@ class HomeComponent extends React.Component<any, any>{
                       </Grid>
                     ))
                   }
-                  <span id="scroller-element"></span>
+                  <span className="scroller-element"></span>
                 </Grid>
             }
           </Grid>
