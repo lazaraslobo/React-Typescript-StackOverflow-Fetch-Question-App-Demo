@@ -1,6 +1,7 @@
 import React from 'react';
-import {RootState} from '../../redux/reducer';
+import {RootState} from '../../core/redux/reducer';
 import { connect } from 'react-redux';
+import fetchAPI from '../../core/api-service';
 
 const mapStateToProps = (state: RootState) => ({
   HomeData  : state.HOME_STATE,
@@ -8,6 +9,9 @@ const mapStateToProps = (state: RootState) => ({
 
 
 class HomeComponent extends React.Component{
+    componentDidMount(){
+        fetchAPI();
+    }
     render(){
         console.log("here ", this);
         return(

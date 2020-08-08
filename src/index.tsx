@@ -5,7 +5,7 @@ import HomeComponent from './components/Home-comp';
 import * as serviceWorker from './serviceWorker';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import rootReducer from './redux/reducer';
+import rootReducer from './core/redux/reducer';
 const store = createStore(rootReducer);
 
 ReactDOM.render(
