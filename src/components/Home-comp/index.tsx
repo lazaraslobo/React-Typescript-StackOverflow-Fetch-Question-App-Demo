@@ -11,8 +11,6 @@ import { Grid } from '@material-ui/core';
 
 // type HocProps = ReturnType<typeof mapStateToProps & typeof mapDispatchToProps>;
 
-// const FetchApiLoading = () => <h1>Fetching Stack API .... </h1>
-
 let isApiFetching = false;
 
 class HomeComponent extends React.Component<any, any>{
@@ -23,43 +21,29 @@ class HomeComponent extends React.Component<any, any>{
     }
   }
   componentDidMount() {
-    this.props.getHomeScreenData((20/4)+1);
+    this.props.getHomeScreenData(1);
   };
 
   componentDidUpdate(props:any){
     window.addEventListener('scroll', function(e) {
-      // let elem = document.getElementById("scroller-element");
-      // let windowOffset = window.pageYOffset;
-      // let staticPageOffset = 5000;
-      // if(elem){
-      //   let elemLength = document.getElementsByClassName("stackQACard").length;
-      //   let scrollerElemPosition = ( elemLength / 20) * staticPageOffset;
-      //   if(windowOffset+650 == scrollerElemPosition){
-      //     console.log("ISHOULD CALL BY NOW scroller elem at ", scrollerElemPosition-100, "win offset ", windowOffset);
-      //     props.getHomeScreenData((elemLength/4)+1);
-      //   }else{
-      //     console.log("scroller elem at ", scrollerElemPosition-100, "win offset ", windowOffset);
-      //   }
-      // }
-      if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight) return;
+      if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight){
+        console.log("window.innerHeight + document.documentElement.scrollTop ", window.innerHeight + document.documentElement.scrollTop);
+        console.log("document.documentElement.offsetHeight ", document.documentElement.offsetHeight);
+        return
+      }else{
         let elemLength = (document.getElementsByClassName("stackQACard").length / 20)+1;
         props.getHomeScreenData(elemLength);
-      
-      document.getElementsByClassName("scroller-element")[0].innerHTML = "window.innerHeight + document.documentElement.scrollTop = "+window.innerHeight + document.documentElement.scrollTop + " ===== document.documentElement.offsetHeight "+ document.documentElement.offsetHeight;
+      }
     });
   }
 
 
   render() {
-    console.log("props ", this.props.HomeData.data);
     return (
       <Wrapper>
         <Grid {...options.contRowCenterStart}>
           <Grid item xs={12} sm={11} lg={10} md={10} xl={10}>
             {
-              // !this.props.HomeData.data.length ?
-              //   <FetchApiLoading />
-              //   :
                 <Grid {...options.contRowCenterStart}>
                   {
                     this.props.HomeData.data.map((eachQA: QAcompPropsInterface, index: number) => (
@@ -82,7 +66,7 @@ const mapStateToProps = (state: RootState) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => ({
-  getHomeScreenData: (pagination : number) => fetchQuestionAnswers(dispatch, pagination)//dispatch({data : {test : "test"}, type : HomeActions.setQuestionAnswers})
+  getHomeScreenData: (pagination : number) => fetchQuestionAnswers(dispatch, pagination)
 });
 
 const fetchQuestionAnswers = (dispatch: Dispatch<AnyAction>, pagination : number) => {
