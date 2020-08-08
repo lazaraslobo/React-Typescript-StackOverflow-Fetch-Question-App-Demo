@@ -24,7 +24,7 @@ class HomeComponent extends React.Component<any, any>{
     return(
       <Wrapper>
         <Grid {...options.contRowCenterStart}>
-          <Grid item xs={12} sm={10} lg={8} md={8} xl={8}>
+          <Grid item xs={12} sm={12} lg={10} md={10} xl={10}>
             {
               !this.props.HomeData.data.length ?
                 <FetchApiLoading />
@@ -32,7 +32,7 @@ class HomeComponent extends React.Component<any, any>{
                 <Grid {...options.contRowCenterStart}>
                 {
                   this.props.HomeData.data.map((eachQA : QAcompPropsInterface, index : number ) => (
-                    <Grid key={index} item xs={12} sm={10} lg={8} md={8} xl={8}>
+                    <Grid key={index} item xs={12} sm={12} lg={6} md={6} xl={6}>
                       <QuestionAnswerCard {...eachQA}/>
                     </Grid>
                   ))

@@ -28,7 +28,7 @@ export interface QAcompPropsInterface {
 
 const QuestionAnswerCard = (props : QAcompPropsInterface) =>{
     return (
-        <Wrapper>
+        <Wrapper className="QuestionAnswerCard">
             <Grid {...options.contRowStartCenter}>
                 <Grid item xs={3} sm={2} lg={2} md={2} xl={2}>
                     <ProfileImage src={props.owner.profile_image ? props.owner.profile_image : require("../../assets/user-profile.png")} alt={props.owner.display_name}/>
@@ -36,11 +36,14 @@ const QuestionAnswerCard = (props : QAcompPropsInterface) =>{
                 <Grid item xs={9}>
                     <RichText>{props.owner.display_name}</RichText>
                 </Grid>
+                <Grid item>
+                    <span className="material-icons WT">more_vert</span>
+                </Grid>
             </Grid>
             <Grid {...options.contRowStartCenter}>
                 <CardTitle>``{props.title}``</CardTitle>
             </Grid>
-            <Grid {...options.contRowStartCenter}>
+            <Grid {...options.contRowStartCenter} className="QAinfoPanel">
                 <Grid item xs={3} sm={4} md={4} lg={2} xl={2}>
                     <Grid {...options.contRowStartCenter}>
                         <Grid item xs={3}>
@@ -69,6 +72,18 @@ const QuestionAnswerCard = (props : QAcompPropsInterface) =>{
                     </Grid>
                 </Grid>
             </Grid>
+            {
+                props.tags.length ?
+                    <Grid {...options.contRowStartCenter}>
+                        <RichText><b>Tags&nbsp;-&nbsp;</b></RichText>
+                        {
+                            props.tags.map((eachElem : string, index : number)=>
+                                <RichText key={index}>{eachElem},&nbsp;&nbsp;</RichText>
+                            )
+                        }
+                    </Grid>
+                :   null
+            }
         </Wrapper>
     )
 }

@@ -10,3 +10,25 @@ body {
 .WT{
   color: white;
 }
+
+.QuestionAnswerCard:hover{
+  background: linear-gradient(45deg, rgba(255,0,255,0.95) 0%, rgba(77,255,249,1) 100%);
+  box-shadow: 8px 4px 8px rgba(0,0,0,0.2), -8px 4px 12px rgba(0,0,0,0.1);
+}
+
+div{
+  animation: fadeIn ease 2s;
+}
+
+@keyframes fadeIn{
+  0%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+  }
+}
+
+.QAinfoPanel{
+  margin-bottom: 1.4em;
+}
