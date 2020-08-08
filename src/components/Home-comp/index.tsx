@@ -13,6 +13,8 @@ type HocProps = ReturnType<typeof mapStateToProps & typeof mapDispatchToProps>;
 
 const FetchApiLoading = () => <h1>Fetching Stack API .... </h1>
 
+let isApiFetching = false;
+
 class HomeComponent extends React.Component<any, any>{
   constructor(props: any) {
     super(props);
@@ -21,23 +23,27 @@ class HomeComponent extends React.Component<any, any>{
     }
   }
   componentDidMount() {
-    this.props.getHomeScreenData();
+    this.props.getHomeScreenData((20/4)+1);
   };
 
   componentDidUpdate(props:any){
     window.addEventListener('scroll', function(e) {
-      let elem = document.getElementById("scroller-element");
-      let windowOffset = window.pageYOffset;
-      let staticPageOffset = 5000;
-      if(elem){
-        let scrollerElemPosition = (document.getElementsByClassName("stackQACard").length / 20) * staticPageOffset;
-        if(windowOffset > scrollerElemPosition - 100){
-          props.getHomeScreenData();
-          console.log("ISHOULD CALL BY NOW scroller elem at ", scrollerElemPosition, "win offset ", windowOffset);
-        }else{
-          console.log("scroller elem at ", scrollerElemPosition, "win offset ", windowOffset);
-        }
-      }
+      // let elem = document.getElementById("scroller-element");
+      // let windowOffset = window.pageYOffset;
+      // let staticPageOffset = 5000;
+      // if(elem){
+      //   let elemLength = document.getElementsByClassName("stackQACard").length;
+      //   let scrollerElemPosition = ( elemLength / 20) * staticPageOffset;
+      //   if(windowOffset+650 == scrollerElemPosition){
+      //     console.log("ISHOULD CALL BY NOW scroller elem at ", scrollerElemPosition-100, "win offset ", windowOffset);
+      //     props.getHomeScreenData((elemLength/4)+1);
+      //   }else{
+      //     console.log("scroller elem at ", scrollerElemPosition-100, "win offset ", windowOffset);
+      //   }
+      // }
+      if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight) return;
+        let elemLength = (document.getElementsByClassName("stackQACard").length / 20)+1;
+        props.getHomeScreenData(elemLength);
     });
   }
 
@@ -74,12 +80,18 @@ const mapStateToProps = (state: RootState) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => ({
-  getHomeScreenData: () => fetchQuestionAnswers(dispatch)//dispatch({data : {test : "test"}, type : HomeActions.setQuestionAnswers})
+  getHomeScreenData: (pagination : number) => fetchQuestionAnswers(dispatch, pagination)//dispatch({data : {test : "test"}, type : HomeActions.setQuestionAnswers})
 });
 
-const fetchQuestionAnswers = (dispatch: Dispatch<AnyAction>) => {
-  return fetchAPI().then(data => {
+const fetchQuestionAnswers = (dispatch: Dispatch<AnyAction>, pagination : number) => {
+  if(!isApiFetching)
+    isApiFetching = true;
+  else
+    return;
+
+  return fetchAPI({page : pagination}).then(data => {
     dispatch({ type: HomeActions.setQuestionAnswers, data: data });
+    isApiFetching = false;
     return data;
   });
 }
