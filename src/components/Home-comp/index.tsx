@@ -6,6 +6,9 @@ import fetchAPI from '../../core/api-service';
 import {HomeActions} from '../../core/redux/action.map';
 import {Wrapper} from './Home.styled';
 import {QuestionAnswerCard, QAcompPropsInterface} from '../re-usables/question-answer-card';
+import {options} from '../Grid'
+import {Grid} from '@material-ui/core';
+
 type HocProps = ReturnType<typeof mapStateToProps & typeof mapDispatchToProps>;
 
 const FetchApiLoading = () => <h1>Fetching Stack API .... </h1>
@@ -18,21 +21,28 @@ class HomeComponent extends React.Component<any, any>{
     this.props.getHomeScreenData();
   };
   render(){
-    console.log("here ",this.props.HomeData.data.length);
+    console.log("here ",JSON.stringify(this.props.HomeData.data[0]));
     return(
       <Wrapper>
-        {
-          !this.props.HomeData.data.length ?
-          <FetchApiLoading />
-          :
-           <>
-           {
-             this.props.HomeData.data.map((eachQA : QAcompPropsInterface ) => <QuestionAnswerCard {...eachQA}/>)
-           }
-           </>
-        }
-          </Wrapper>
-        )
+        <Grid {...options.contRowCenterStart}>
+          <Grid item xs={8}>
+            {
+              !this.props.HomeData.data.length ?
+              <FetchApiLoading />
+              :
+              <Grid {...options.contRowCenterStart}>
+              {
+                this.props.HomeData.data.map((eachQA : QAcompPropsInterface, index : number ) => (
+                  <Grid key={index} item xs={8}>
+                    <QuestionAnswerCard {...eachQA}/>
+                  </Grid>
+                ))
+              }
+              </Grid>
+            }
+          </Grid>
+        </Grid>
+      </Wrapper>)
     }
 }
 
