@@ -1,13 +1,15 @@
 import axios from 'axios';
 
-const fetchAPI = () : any => {
-    axios.get(`https://api.stackexchange.com/search/advanced?site=stackoverflow.com&q=firebase`)
-      .then(res => {
-          console.log("API SUCCESS ", res);
-          return res;
-      }).catch(err =>{
-          console.log("GOT AN ERROR ", err);
-      });
+let url  = `https://api.stackexchange.com/2.2/questions?((&site=stackoverflow&page=5&pagesize=20&order=desc&sort=activity&tagged=javascript&filter=default`;
+const fetchAPI = async () => {
+    return axios.get(url)
+    .then(res => {
+        console.log("API SUCCESS ", res);
+        return res.data.items;
+    }).catch(err =>{
+        console.log("GOT AN ERROR ", err);
+        return err;
+    });
 }
 
 export default fetchAPI;
