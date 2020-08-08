@@ -22,7 +22,7 @@ const RichText = styled.span`
 const CardTitle = styled.span`
     color : white;
     font-weight : 600;
-    margin: 1.5em 0em 1em 1em;
+    margin: 1.5em 0em 3em 1em;
 `;
 
 const ViewCount = styled.img`

@@ -41,33 +41,30 @@ const QuestionAnswerCard = (props : QAcompPropsInterface) =>{
                 <CardTitle>``{props.title}``</CardTitle>
             </Grid>
             <Grid {...options.contRowStartCenter}>
-                {/* <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
-                    <Grid {...options.contRowCenterCenter}>
-                        <Grid item xs={2}>
-                            <span className="material-icons WT">people</span>
-                        </Grid>
-                        <Grid item xs={2}>
-                            <RichText>{props.answer_count}</RichText>
-                        </Grid>
-                    </Grid>
-                </Grid> */}
-                <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
+                <Grid item xs={3} sm={4} md={4} lg={2} xl={2}>
                     <Grid {...options.contRowStartCenter}>
-                        <Grid item xs={2}>
+                        <Grid item xs={3}>
                             <span className="material-icons WT">comment</span>
                         </Grid>
-                        <Grid item xs={2}>
+                        <Grid item xs={3}>
                             <RichText>{props.answer_count}</RichText>
                         </Grid>
                     </Grid>
                 </Grid>
-                <Grid item xs={4} sm={4} md={4} lg={4} xl={4}>
+                <Grid item xs={3} sm={4} md={4} lg={2} xl={2}>
                     <Grid {...options.contRowStartCenter}>
-                        <Grid item xs={2}>
+                        <Grid item xs={3}>
                             <span className="material-icons WT">remove_red_eye</span>
                         </Grid>
                         <Grid item xs={3}>
                             <RichText>{props.view_count}</RichText>
+                        </Grid>
+                    </Grid>
+                </Grid>
+                <Grid item xs={3} sm={4} md={4} lg={2} xl={2}>
+                    <Grid {...options.contRowCenterCenter}>
+                        <Grid item xs={3}>
+                            <span className="material-icons WT">{props.is_answered ? 'check_circle' : 'close'}</span>
                         </Grid>
                     </Grid>
                 </Grid>
