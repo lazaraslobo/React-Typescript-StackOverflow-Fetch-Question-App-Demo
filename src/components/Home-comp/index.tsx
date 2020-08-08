@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import fetchAPI from '../../core/api-service';
 import {HomeActions} from '../../core/redux/action.map';
 import {Wrapper} from './Home.styled';
-
+import {QuestionAnswerCard, QAcompPropsInterface} from '../re-usables/question-answer-card';
 type HocProps = ReturnType<typeof mapStateToProps & typeof mapDispatchToProps>;
 
 const FetchApiLoading = () => <h1>Fetching Stack API .... </h1>
@@ -26,7 +26,9 @@ class HomeComponent extends React.Component<any, any>{
           <FetchApiLoading />
           :
            <>
-            <h2>i got data {this.props.HomeData.data.length}</h2>
+           {
+             this.props.HomeData.data.map((eachQA : QAcompPropsInterface ) => <QuestionAnswerCard {...eachQA}/>)
+           }
            </>
         }
           </Wrapper>
