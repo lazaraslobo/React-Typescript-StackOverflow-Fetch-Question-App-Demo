@@ -21,24 +21,23 @@ class HomeComponent extends React.Component<any, any>{
     this.props.getHomeScreenData();
   };
   render(){
-    console.log("here ",JSON.stringify(this.props.HomeData.data[0]));
     return(
       <Wrapper>
         <Grid {...options.contRowCenterStart}>
-          <Grid item xs={8}>
+          <Grid item xs={12} sm={10} lg={8} md={8} xl={8}>
             {
               !this.props.HomeData.data.length ?
-              <FetchApiLoading />
+                <FetchApiLoading />
               :
-              <Grid {...options.contRowCenterStart}>
-              {
-                this.props.HomeData.data.map((eachQA : QAcompPropsInterface, index : number ) => (
-                  <Grid key={index} item xs={8}>
-                    <QuestionAnswerCard {...eachQA}/>
-                  </Grid>
-                ))
-              }
-              </Grid>
+                <Grid {...options.contRowCenterStart}>
+                {
+                  this.props.HomeData.data.map((eachQA : QAcompPropsInterface, index : number ) => (
+                    <Grid key={index} item xs={12} sm={10} lg={8} md={8} xl={8}>
+                      <QuestionAnswerCard {...eachQA}/>
+                    </Grid>
+                  ))
+                }
+                </Grid>
             }
           </Grid>
         </Grid>
@@ -58,8 +57,7 @@ const fetchQuestionAnswers = (dispatch : Dispatch<AnyAction>) =>{
   return fetchAPI().then(data =>{
     dispatch({type : HomeActions.setQuestionAnswers, data : data});
     return data;
-  }); 
-  console.log("here connecting ");
+  });
 }
 
 export default connect(

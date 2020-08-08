@@ -1,5 +1,5 @@
 import React from 'react';
-import {Wrapper, ProfileImage} from './cards.styled';
+import {Wrapper, ProfileImage, RichText, CardTitle, ViewCount} from './cards.styled';
 import {options} from '../Grid'
 import {Grid} from '@material-ui/core';
 
@@ -30,15 +30,30 @@ const QuestionAnswerCard = (props : QAcompPropsInterface) =>{
     return (
         <Wrapper>
             <Grid {...options.contRowStartCenter}>
-                    <Grid item xs={2}>
+                    <Grid item xs={3} sm={2} lg={2} md={2} xl={2}>
                         <ProfileImage src={props.owner.profile_image ? props.owner.profile_image : require("../../assets/user-profile.png")} alt={props.owner.display_name}/>
                     </Grid>
-                    <Grid item xs={8}>
-                        <span>{props.owner.display_name}</span>
+                    <Grid item xs={9}>
+                        <RichText>{props.owner.display_name}</RichText>
                     </Grid>
-                    <Grid item xs={2}>
-                        <span>hi</span>
+            </Grid>
+            <Grid {...options.contRowStartCenter}>
+                    <CardTitle>``{props.title}``</CardTitle>
+            </Grid>
+            <Grid {...options.contRowStartCenter}>
+                <Grid item xs={10} sm={10} md={8} lg={8} xl={8}>
+                    <Grid {...options.contRowStartCenter}>
+                        <Grid item xs={1}>
+                            <span className="material-icons WT">people</span>
+                        </Grid>
+                        <Grid item xs={1}>
+                            <RichText>{props.answer_count}</RichText>
+                        </Grid>
                     </Grid>
+                </Grid>
+                <Grid item xs={2}>
+                    <span className="material-icons WT">remove_red_eye</span>
+                </Grid>
             </Grid>
         </Wrapper>
     )
