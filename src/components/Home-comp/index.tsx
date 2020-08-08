@@ -4,21 +4,32 @@ import {RootState} from '../../core/redux/reducer';
 import { connect } from 'react-redux';
 import fetchAPI from '../../core/api-service';
 import {HomeActions} from '../../core/redux/action.map';
+import {Wrapper} from './Home.styled';
 
-type HocProps = ReturnType<typeof mapStateToProps> & typeof mapDispatchToProps;
+type HocProps = ReturnType<typeof mapStateToProps & typeof mapDispatchToProps>;
 
+const FetchApiLoading = () => <h1>Fetching Stack API .... </h1>
 
 class HomeComponent extends React.Component<any, any>{
+  constructor(props : any){
+    super(props);
+  }
   componentDidMount(){
-    // fetchAPI();
+    this.props.getHomeScreenData();
   };
   render(){
-        console.log("here ", this);
-        return(
-          <>
-            <h1>hey</h1>
-            <button onClick={this.props.getHomeScreenData}>fetch</button>
-          </>
+    console.log("here ",this.props.HomeData.data.length);
+    return(
+      <Wrapper>
+        {
+          !this.props.HomeData.data.length ?
+          <FetchApiLoading />
+          :
+           <>
+            <h2>i got data {this.props.HomeData.data.length}</h2>
+           </>
+        }
+          </Wrapper>
         )
     }
 }
@@ -32,8 +43,9 @@ const mapDispatchToProps = (dispatch : Dispatch<AnyAction>) =>({
 });
 
 const fetchQuestionAnswers = (dispatch : Dispatch<AnyAction>) =>{
-  fetchAPI().then(data =>{
+  return fetchAPI().then(data =>{
     dispatch({type : HomeActions.setQuestionAnswers, data : data});
+    return data;
   }); 
   console.log("here connecting ");
 }
