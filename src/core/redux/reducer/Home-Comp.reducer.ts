@@ -10,11 +10,12 @@ const initialState : HomeModuleIntials = {
 
 interface actionsProps {
     type    :   string;
-    data    :   {};
+    data    :   [];
 }
 
-const updateHomePageData = (oldState : HomeModuleIntials, newData : {}) => {
-    let newState = {...oldState, data : newData};
+const updateHomePageData = (oldState : HomeModuleIntials, newData : []) => {
+    console.log("updating redux ", newData);
+    let newState = { data : [...oldState.data, ...newData]};
     return newState;
 };
 
