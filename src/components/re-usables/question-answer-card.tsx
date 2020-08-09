@@ -2,28 +2,7 @@ import React from 'react';
 import {Wrapper, ProfileImage, RichText, CardTitle} from './cards.styled';
 import {options} from '../Grid'
 import {Grid} from '@material-ui/core';
-
-export interface QAcompPropsInterface {
-    "tags": [],
-    "owner": { 
-        "reputation": number,
-        "user_id": number,
-        "user_type": string,
-        "profile_image": string,
-        "display_name": string,
-        "link":  string
-    },
-    "is_answered": false,
-    "view_count": number,
-    "answer_count": number,
-    "score": number,
-    "last_activity_date": number,
-    "creation_date": number,
-    "question_id": number,
-    "content_license": string,
-    "link": string,
-    "title": string 
-}
+import {CardDataInterface} from '../data.comp.interfaces';
 
 interface interfaceBar{
     iconName    :  string
@@ -45,7 +24,7 @@ const CreateQaInfoBar = (barProps : interfaceBar) =>{
     )
 }
 
-const QuestionAnswerCard = (props : QAcompPropsInterface) =>{
+const QuestionAnswerCard = (props : CardDataInterface) =>{
     return (
         <Wrapper className="QuestionAnswerCard">
             <Grid {...options.contRowStartCenter}>

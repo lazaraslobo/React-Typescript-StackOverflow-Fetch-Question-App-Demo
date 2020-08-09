@@ -5,10 +5,13 @@ import { connect } from 'react-redux';
 import fetchAPI from '../../core/api-service';
 import { HomeActions } from '../../core/redux/action.map';
 import { Wrapper, TableWrapper } from './Home.styled';
-import { QuestionAnswerCard, QAcompPropsInterface } from '../re-usables/question-answer-card';
+import { QuestionAnswerCard } from '../re-usables/question-answer-card';
+import {CardDataInterface} from '../data.comp.interfaces';
 import { options } from '../Grid'
 import { Grid } from '@material-ui/core';
 import {Modal} from '../re-usables/modal'
+import TableView from '../re-usables/table';
+
 // type HocProps = ReturnType<typeof mapStateToProps & typeof mapDispatchToProps>;
 
 let isApiFetching = false;
@@ -45,7 +48,7 @@ class HomeComponent extends React.Component<any, any>{
                 {
                   this.props.HomeData.data.length ?
                     <Grid item xs={12}>
-                      <this.RenderTableView data={this.props.HomeData.data}/>
+                      <TableView onClickRow={(data : CardDataInterface)=>this.openModal(data)} data={this.props.HomeData.data}/>
                     </Grid>
                   : <h1>Still Fetching ....</h1>
                 }
@@ -62,41 +65,13 @@ class HomeComponent extends React.Component<any, any>{
         </Grid>
       </Wrapper>)
   }
-
-  RenderTableView = (tableData : {data : []}) =>{
-    console.log("incoming ", tableData);
-    return (
-        <Grid {...options.contRowCenterCenter}>
-          <Grid item xs={12}>
-            <TableWrapper >
-              <thead>
-                <tr className="table-header">
-                  <th>Sl. No</th>
-                  <th>Author</th>
-                  <th>Title</th>
-                  <th>Creation Date</th>
-                </tr>
-              </thead>
-              <tbody>
-                {
-                  tableData.data.map((eachElem : QAcompPropsInterface, index)=>
-                    <tr className="table-row-data" key={index} onClick={()=>this.setState({isModalOpen : true, modalData : eachElem})}>
-                      <td>{index+1}</td>
-                      <td>{eachElem.owner.display_name}</td>
-                      <td>{eachElem.title}</td>
-                      <td>{eachElem.creation_date}</td>
-                    </tr>
-                  )
-                }
-              </tbody>
-            </TableWrapper>
-          </Grid>
-        </Grid>
-    )
-  }
   
   closeModal = () =>{
     this.setState({...this.state, ...{isModalOpen : false}});
+  }
+
+  openModal = (modalData : CardDataInterface) : void =>{
+    this.setState({isModalOpen : true, modalData})
   }
 }
 
