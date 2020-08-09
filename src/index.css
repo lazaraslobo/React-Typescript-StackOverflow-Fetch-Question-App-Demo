@@ -73,3 +73,7 @@ th{
   color: white;
   cursor: pointer;
 }
+
+.MuiPaper-root.MuiDialog-paper{
+  width: 100%;
+}

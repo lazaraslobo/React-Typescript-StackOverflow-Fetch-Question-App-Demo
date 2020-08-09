@@ -9,11 +9,15 @@ const fetchAPI = async (data : pageSetup) => {
     return axios.get(url)
     .then(res => {
         console.log("API SUCCESS ", res);
+        if(!res.data.items.length){
+            throw new Error("No data")
+        }
+
         return res.data.items;
     })
     .catch(err =>{
         console.log("GOT AN ERROR ", err);
-        return err;
+        return [];
     });
 }
 

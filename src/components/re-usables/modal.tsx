@@ -7,19 +7,13 @@ import styled from 'styled-components';
 const DialogWrapper = styled.div`
 `;
 
-const handleClose = () =>{
-
-}
-
 type ModalPropsInterface = {
-    isOpen      :   boolean
+    isOpen          :   boolean
+    handleClose     :   () => void
 }   
 
-export const Modal : React.FunctionComponent<ModalPropsInterface> = ({children, isOpen}) =>(
-    <DialogWrapper>
-        <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={isOpen}>
-            <DialogTitle id="simple-dialog-title">Set backup account</DialogTitle>
-            {children}
-        </Dialog>
-    </DialogWrapper>
+export const Modal : React.FunctionComponent<ModalPropsInterface> = ({children, isOpen, handleClose}) =>(
+    <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={isOpen}>
+        {children}
+    </Dialog>
 )

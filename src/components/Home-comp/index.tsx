@@ -44,18 +44,22 @@ class HomeComponent extends React.Component<any, any>{
               <Grid {...options.contRowCenterStart}>
                 {
                   this.props.HomeData.data.length ?
-                    <this.RenderTableView data={this.props.HomeData.data}/>
+                    <Grid item xs={12}>
+                      <this.RenderTableView data={this.props.HomeData.data}/>
+                    </Grid>
                   : <h1>Still Fetching ....</h1>
                 }
                 <span className="scroller-element"></span>
               </Grid>
           </Grid>
         </Grid>
-          <Grid item xs={12} sm={9} lg={6} md={6} xl={6} className="stackQACard">
-            <Modal {...{isOpen : this.state.isModalOpen}}>
+        <Grid {...options.contRowCenterStart}>
+          <Grid item className="stackQACard" xs={12} sm={12} md={12} lg={12} xl={12}>
+            <Modal {...{isOpen : this.state.isModalOpen, handleClose : this.closeModal}}>
                 <QuestionAnswerCard {...this.state.modalData} />
             </Modal>
           </Grid>
+        </Grid>
       </Wrapper>)
   }
 
@@ -85,13 +89,15 @@ class HomeComponent extends React.Component<any, any>{
                   )
                 }
               </tbody>
-      
             </TableWrapper>
           </Grid>
         </Grid>
     )
   }
   
+  closeModal = () =>{
+    this.setState({...this.state, ...{isModalOpen : false}});
+  }
 }
 
 const mapStateToProps = (state: RootState) => ({
@@ -114,16 +120,6 @@ const fetchQuestionAnswers = (dispatch: Dispatch<AnyAction>, pagination : number
     return data;
   });
 }
-
-const OpenModal = ((modalValues : QAcompPropsInterface) => {
-  return(
-    <Modal {...{isOpen : true}}>
-      <Grid item xs={12} sm={9} lg={6} md={6} xl={6} className="stackQACard">
-        <QuestionAnswerCard {...modalValues} />
-      </Grid>
-    </Modal>
-  )
-})
 
 export default connect(
   mapStateToProps,
