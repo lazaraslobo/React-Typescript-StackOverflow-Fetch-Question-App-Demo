@@ -4,7 +4,7 @@ import { RootState } from '../../core/redux/reducer';
 import { connect } from 'react-redux';
 import fetchAPI from '../../core/api-service';
 import { HomeActions } from '../../core/redux/action.map';
-import { Wrapper, TableWrapper } from './Home.styled';
+import { Wrapper } from './Home.styled';
 import { QuestionAnswerCard } from '../re-usables/question-answer-card';
 import {CardDataInterface} from '../data.comp.interfaces';
 import { options } from '../Grid'
@@ -24,6 +24,7 @@ class HomeComponent extends React.Component<any, any>{
       modalData     : {}
     }
   }
+
   componentDidMount() {
     this.props.getHomeScreenData(1);
   };
@@ -34,7 +35,6 @@ class HomeComponent extends React.Component<any, any>{
         return
       }else{
         let elemLength = (document.getElementsByClassName("stackQACard").length / 20)+1;
-        this.console.log("here ", document.getElementsByClassName("stackQACard").length);
         props.getHomeScreenData(elemLength);
       }
     });

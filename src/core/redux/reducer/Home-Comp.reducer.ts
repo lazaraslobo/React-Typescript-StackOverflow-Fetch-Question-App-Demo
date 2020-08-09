@@ -14,7 +14,6 @@ interface actionsProps {
 }
 
 const updateHomePageData = (oldState : HomeModuleIntials, newData : []) => {
-    console.log("updating redux ", newData);
     let newState = { data : [...oldState.data, ...newData]};
     return newState;
 };

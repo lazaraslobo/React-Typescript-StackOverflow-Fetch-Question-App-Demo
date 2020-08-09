@@ -5,7 +5,6 @@ interface pageSetup{
 }
 
 const fetchAPI = async (data : pageSetup) => {
-    // let url  = `https://api.stackexchange.com/2.2/questions?site=stackoverflow&page=${data.page}&pagesize=20&order=desc&sort=activity&tagged=javascript&filter=default`;
     let url  = `https://api.stackexchange.com/2.2/questions?key=U4DMV*8nvpm3EOpvf69Rxw((&site=stackoverflow&page=${data.page}&pagesize=20&order=desc&sort=activity&tagged=javascript&filter=default`;
     return axios.get(url)
     .then(res => {

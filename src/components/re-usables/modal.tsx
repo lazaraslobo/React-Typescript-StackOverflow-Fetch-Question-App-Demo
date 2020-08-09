@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import Dialog from '@material-ui/core/Dialog';
-import DialogTitle from '@material-ui/core/DialogTitle';
 import styled from 'styled-components';
 
 
@@ -13,7 +12,7 @@ type ModalPropsInterface = {
 }   
 
 export const Modal : React.FunctionComponent<ModalPropsInterface> = ({children, isOpen, handleClose}) =>(
-    <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={isOpen}>
+    <Dialog onClose={handleClose} aria-labelledby="iqm-app-dialog" open={isOpen}>
         {children}
     </Dialog>
 )

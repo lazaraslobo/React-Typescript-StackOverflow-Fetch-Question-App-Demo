@@ -14,13 +14,11 @@ interface tablePropsInterface{
 const parseDate = (crationDate : number) =>{
     let datePouch = crationDate.toString().replace(/.{2}/g, '$&,').split(',');
     const utcDate2 = new Date(Date.UTC(parseInt(datePouch[0]), parseInt(datePouch[1], parseInt(datePouch[2], parseInt(datePouch[3], parseInt(datePouch[4], parseInt(datePouch[5])))))));
-    console.log("data ", datePouch);
     let finalDate = utcDate2.toUTCString();
     return (finalDate.includes("Date") ? "--" : finalDate);
 }
 
 const RenderTableView = (tableprops : tablePropsInterface) =>{
-    console.log("incoming ", tableprops);
     return (
         <Grid {...options.contRowCenterCenter}>
           <Grid item xs={12}>
@@ -42,8 +40,7 @@ const RenderTableView = (tableprops : tablePropsInterface) =>{
                       <td>{eachElem.title}</td>
                       <td>{parseDate(eachElem.creation_date)}
                       </td>
-                    </tr>
-                  )
+                    </tr>)
                 }
               </tbody>
             </TableWrapper>
