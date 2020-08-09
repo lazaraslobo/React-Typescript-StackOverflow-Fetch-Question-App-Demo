@@ -11,6 +11,14 @@ interface tablePropsInterface{
     onClickRow(data : CardDataInterface)  :  any
 }
 
+const parseDate = (crationDate : number) =>{
+    let datePouch = crationDate.toString().replace(/.{2}/g, '$&,').split(',');
+    const utcDate2 = new Date(Date.UTC(parseInt(datePouch[0]), parseInt(datePouch[1], parseInt(datePouch[2], parseInt(datePouch[3], parseInt(datePouch[4], parseInt(datePouch[5])))))));
+    console.log("data ", datePouch);
+    let finalDate = utcDate2.toUTCString();
+    return (finalDate.includes("Date") ? "--" : finalDate);
+}
+
 const RenderTableView = (tableprops : tablePropsInterface) =>{
     console.log("incoming ", tableprops);
     return (
@@ -32,7 +40,8 @@ const RenderTableView = (tableprops : tablePropsInterface) =>{
                       <td>{index+1}</td>
                       <td>{eachElem.owner.display_name}</td>
                       <td>{eachElem.title}</td>
-                      <td>{eachElem.creation_date}</td>
+                      <td>{parseDate(eachElem.creation_date)}
+                      </td>
                     </tr>
                   )
                 }
