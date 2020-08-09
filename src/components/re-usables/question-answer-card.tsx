@@ -1,5 +1,5 @@
 import React from 'react';
-import {Wrapper, ProfileImage, RichText, CardTitle} from './cards.styled';
+import {Wrapper, ProfileImage, RichText, CardTitle, VisitContent} from './cards.styled';
 import {options} from '../Grid'
 import {Grid} from '@material-ui/core';
 import {CardDataInterface} from '../data.comp.interfaces';
@@ -45,6 +45,9 @@ const QuestionAnswerCard = (props : CardDataInterface) =>{
                 <CreateQaInfoBar {...{iconName : "comment", text : props.answer_count}}/>
                 <CreateQaInfoBar {...{iconName : "remove_red_eye", text : props.view_count}}/>
                 <CreateQaInfoBar {...{iconName : props.is_answered ? 'check_circle' : 'close'}}/>
+                <a href={props.link} target="_blank">
+                    <VisitContent>Visit</VisitContent>
+                </a>
             </Grid>
             {
                 props.tags.length ?

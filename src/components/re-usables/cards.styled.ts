@@ -34,4 +34,16 @@ const ViewCount = styled.img`
     border-radius: 50%;
 `;
 
-export {Wrapper, ProfileImage, RichText, CardTitle, ViewCount}
+const VisitContent = styled.button`
+    padding: 5px;
+    background: #fff1ed4a;
+    width: 7em;
+    border-radius: 6px;
+    border: none;
+    outline : none;
+    cursor : pointer;
+    color: white;
+    font-weight: 600;
+`;
+
+export {Wrapper, ProfileImage, RichText, CardTitle, ViewCount, VisitContent}
