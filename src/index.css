@@ -19,7 +19,7 @@ body {
 }
 
 div{
-  animation: fadeIn ease 2s;
+  animation: fadeIn ease 500ms;
 }
 
 @keyframes fadeIn{
