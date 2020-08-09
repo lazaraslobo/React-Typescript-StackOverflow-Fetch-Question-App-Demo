@@ -28,7 +28,7 @@ const RenderTableView = (tableprops : tablePropsInterface) =>{
               <tbody>
                 {
                   tableprops.data.map((eachElem : CardDataInterface, index)=>
-                    <tr className="table-row-data" key={index} onClick={()=>tableprops.onClickRow(eachElem)}>
+                    <tr className="table-row-data stackQACard" key={index} onClick={()=>tableprops.onClickRow(eachElem)}>
                       <td>{index+1}</td>
                       <td>{eachElem.owner.display_name}</td>
                       <td>{eachElem.title}</td>

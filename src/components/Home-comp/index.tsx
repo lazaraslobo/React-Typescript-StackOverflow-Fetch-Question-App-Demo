@@ -34,6 +34,7 @@ class HomeComponent extends React.Component<any, any>{
         return
       }else{
         let elemLength = (document.getElementsByClassName("stackQACard").length / 20)+1;
+        this.console.log("here ", document.getElementsByClassName("stackQACard").length);
         props.getHomeScreenData(elemLength);
       }
     });
@@ -57,7 +58,7 @@ class HomeComponent extends React.Component<any, any>{
           </Grid>
         </Grid>
         <Grid {...options.contRowCenterStart}>
-          <Grid item className="stackQACard" xs={12} sm={12} md={12} lg={12} xl={12}>
+          <Grid item xs={12} sm={12} md={12} lg={12} xl={12}>
             <Modal {...{isOpen : this.state.isModalOpen, handleClose : this.closeModal}}>
                 <QuestionAnswerCard {...this.state.modalData} />
             </Modal>
