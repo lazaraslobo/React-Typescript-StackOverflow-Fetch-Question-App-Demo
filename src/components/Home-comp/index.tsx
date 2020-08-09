@@ -62,27 +62,29 @@ class HomeComponent extends React.Component<any, any>{
   RenderTableView = (tableData : {data : []}) =>{
     console.log("incoming ", tableData);
     return (
-      <TableWrapper>
-        <table>
-          <tr className="table-header">
-            <th>Sl. No</th>
-            <th>Author</th>
-            <th>Title</th>
-            <th>Creation Date</th>
-          </tr>
-          {
-            tableData.data.map((eachElem : QAcompPropsInterface, index)=>
-              <tr className="table-row-data" key={index} onClick={()=>this.setState({isModalOpen : true, modalData : eachElem})}>
-                <td>{index+1}</td>
-                <td>{eachElem.owner.display_name}</td>
-                <td>{eachElem.title}</td>
-                <td>{eachElem.creation_date}</td>
+        <Grid {...options.contRowCenterCenter}>
+          <Grid item xs={12}>
+            <TableWrapper >
+              <tr className="table-header">
+                <th>Sl. No</th>
+                <th>Author</th>
+                <th>Title</th>
+                <th>Creation Date</th>
               </tr>
-            )
-          }
-  
-        </table>
-      </TableWrapper>
+              {
+                tableData.data.map((eachElem : QAcompPropsInterface, index)=>
+                  <tr className="table-row-data" key={index} onClick={()=>this.setState({isModalOpen : true, modalData : eachElem})}>
+                    <td>{index+1}</td>
+                    <td>{eachElem.owner.display_name}</td>
+                    <td>{eachElem.title}</td>
+                    <td>{eachElem.creation_date}</td>
+                  </tr>
+                )
+              }
+      
+            </TableWrapper>
+          </Grid>
+        </Grid>
     )
   }
   
