@@ -32,7 +32,7 @@ interface interfaceBar{
 
 const CreateQaInfoBar = (barProps : interfaceBar) =>{
     return (
-        <Grid item xs={3} sm={4} md={4} lg={2} xl={2}>
+        <Grid item xs={4} sm={4} md={4} lg={3} xl={3}>
             <Grid {...options.contRowStartCenter}>
                 <Grid item xs={3}>
                     <span className="material-icons WT">{barProps.iconName}</span>
