@@ -1,25 +1,26 @@
 import {HomeActions} from '../action.map';
+import {CardDataInterface, CardDataInitial} from "../../../components/data.comp.interfaces";
 
 interface HomeModuleIntials{
-    data        : []
+    data        : [CardDataInterface]
 }
 
 const initialState : HomeModuleIntials = {
-    data    : []
+    data    : [CardDataInitial]
 };
 
 interface actionsProps {
     type    :   string;
-    data    :   [];
+    data    :   [CardDataInterface];
 }
 
-const updateHomePageData = (oldState : HomeModuleIntials, newData : []) => {
+const updateHomePageData = (oldState : HomeModuleIntials, newData : [CardDataInterface]) => {
     let newState = { data : [...oldState.data, ...newData]};
     return newState;
 };
 
 const HOME_REDUCER = (state = initialState, action : actionsProps) => {
-    const dataToUpdate      =  action.data;
+    const dataToUpdate : [CardDataInterface]     =  action.data;
     switch(action.type){
         case HomeActions.setQuestionAnswers          :   return updateHomePageData(state, dataToUpdate);
         default : return state;
