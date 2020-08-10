@@ -6,22 +6,34 @@ import fetchAPI from '../../core/api-service';
 import { HomeActions } from '../../core/redux/action.map';
 import { Wrapper } from './Home.styled';
 import { QuestionAnswerCard } from '../re-usables/question-answer-card';
-import {CardDataInterface} from '../data.comp.interfaces';
+import {CardDataInterface, CardDataInitial} from '../data.comp.interfaces';
 import { options } from '../Grid'
 import { Grid } from '@material-ui/core';
 import {Modal} from '../re-usables/modal'
 import TableView from '../re-usables/table';
 
-// type HocProps = ReturnType<typeof mapStateToProps & typeof mapDispatchToProps>;
+// type HocProps = typeof mapStateToProps & typeof mapDispatchToProps;
+
+type MapStateProps = {
+  HomeData      : {
+    data  : []
+  },
+  getHomeScreenData : (page : number) => void
+}
+
+type stateInterface = {
+  isModalOpen   : boolean,
+  modalData     : CardDataInterface,
+}
 
 let isApiFetching = false;
 
-class HomeComponent extends React.Component<any, any>{
-  constructor(props: any) {
+class HomeComponent extends React.Component<MapStateProps, stateInterface>{
+  constructor(props: MapStateProps) {
     super(props);
     this.state = {
       isModalOpen   : false,
-      modalData     : {}
+      modalData     : CardDataInitial
     }
   }
 

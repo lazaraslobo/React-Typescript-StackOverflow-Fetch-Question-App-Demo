@@ -19,3 +19,26 @@ export interface CardDataInterface {
     "link": string,
     "title": string 
 }
+
+
+export const CardDataInitial : CardDataInterface = {
+    "tags": [],
+    "owner": { 
+        "reputation": 0,
+        "user_id": 0,
+        "user_type": "",
+        "profile_image": "",
+        "display_name": "",
+        "link":  ""
+    },
+    "is_answered": false,
+    "view_count": 0,
+    "answer_count": 0,
+    "score": 0,
+    "last_activity_date": 0,
+    "creation_date": 0,
+    "question_id": 0,
+    "content_license": "",
+    "link": "",
+    "title": "" 
+}
