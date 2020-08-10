@@ -12,24 +12,22 @@ import { Grid } from '@material-ui/core';
 import {Modal} from '../re-usables/modal'
 import TableView from '../re-usables/table';
 
-// type HocProps = typeof mapStateToProps & typeof mapDispatchToProps;
-
-type MapStateProps = {
+type CompProps = {
   HomeData      : {
     data  : []
   },
   getHomeScreenData : (page : number) => void
 }
 
-type stateInterface = {
+type componentStateInterface = {
   isModalOpen   : boolean,
   modalData     : CardDataInterface,
 }
 
 let isApiFetching = false;
 
-class HomeComponent extends React.Component<MapStateProps, stateInterface>{
-  constructor(props: MapStateProps) {
+class HomeComponent extends React.Component<CompProps, componentStateInterface>{
+  constructor(props: CompProps) {
     super(props);
     this.state = {
       isModalOpen   : false,
@@ -41,7 +39,7 @@ class HomeComponent extends React.Component<MapStateProps, stateInterface>{
     this.props.getHomeScreenData(1);
   };
 
-  componentDidUpdate(props:MapStateProps){
+  componentDidUpdate(props:CompProps){
     window.addEventListener('scroll', function(e) {
       if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight){
         return
