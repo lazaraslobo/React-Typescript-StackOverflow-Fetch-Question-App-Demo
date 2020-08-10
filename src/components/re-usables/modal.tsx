@@ -3,8 +3,7 @@ import Dialog from '@material-ui/core/Dialog';
 import styled from 'styled-components';
 
 
-const DialogWrapper = styled.div`
-`;
+const DialogWrapper = styled.div``;
 
 type ModalPropsInterface = {
     isOpen          :   boolean
