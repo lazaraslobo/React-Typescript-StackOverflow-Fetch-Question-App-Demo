@@ -8,7 +8,7 @@ const TableWrapper = styled.table`width : 100%`;
 
 interface tablePropsInterface{
     data            :   [],
-    onClickRow(data : CardDataInterface)  :  any
+    onClickRow  :  (data : CardDataInterface) => void
 }
 
 const parseDate = (crationDate : number) =>{

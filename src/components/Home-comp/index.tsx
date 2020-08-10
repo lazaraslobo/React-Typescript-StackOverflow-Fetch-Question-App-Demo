@@ -1,5 +1,5 @@
 import React from 'react';
-import { Dispatch, AnyAction } from 'redux'
+import { Dispatch } from 'redux'
 import { RootState } from '../../core/redux/reducer';
 import { connect } from 'react-redux';
 import fetchAPI from '../../core/api-service';
@@ -41,7 +41,7 @@ class HomeComponent extends React.Component<MapStateProps, stateInterface>{
     this.props.getHomeScreenData(1);
   };
 
-  componentDidUpdate(props:any){
+  componentDidUpdate(props:MapStateProps){
     window.addEventListener('scroll', function(e) {
       if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight){
         return
@@ -92,11 +92,11 @@ const mapStateToProps = (state: RootState) => ({
   HomeData: state.HOME_STATE,
 });
 
-const mapDispatchToProps = (dispatch: Dispatch<AnyAction>) => ({
+const mapDispatchToProps = (dispatch: Dispatch) => ({
   getHomeScreenData: (pagination : number) => fetchQuestionAnswers(dispatch, pagination)
 });
 
-const fetchQuestionAnswers = (dispatch: Dispatch<AnyAction>, pagination : number) => {
+const fetchQuestionAnswers = (dispatch: Dispatch, pagination : number) => {
   if(!isApiFetching)
     isApiFetching = true;
   else
