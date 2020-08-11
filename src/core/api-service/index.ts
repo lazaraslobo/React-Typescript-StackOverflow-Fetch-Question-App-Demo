@@ -1,12 +1,12 @@
 import axios from 'axios';
 
 interface pageSetup{
-    page    : number
+    url     : string
 }
 
 const fetchAPI = async (data : pageSetup) => {
-    let url  = `https://api.stackexchange.com/2.2/questions?key=U4DMV*8nvpm3EOpvf69Rxw((&site=stackoverflow&page=${data.page}&pagesize=20&order=desc&sort=activity&tagged=javascript&filter=default`;
-    return axios.get(url)
+    // let url  = `https://api.stackexchange.com/2.2/questions?key=U4DMV*8nvpm3EOpvf69Rxw((&site=stackoverflow&page=${data.page}&pagesize=20&order=desc&sort=activity&tagged=javascript&filter=default`;
+    return axios.get(data.url)
     .then(res => {
         console.log("API SUCCESS ", res);
         if(!res.data.items.length){

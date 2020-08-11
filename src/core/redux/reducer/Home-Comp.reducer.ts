@@ -14,15 +14,21 @@ interface actionsProps {
     data    :   [CardDataInterface];
 }
 
-const updateHomePageData = (oldState : HomeModuleIntials, newData : [CardDataInterface]) => {
+const appendPaginatedDataList = (oldState : HomeModuleIntials, newData : [CardDataInterface]) => {
     let newState = { data : [...oldState.data, ...newData]};
+    return newState;
+};
+
+const setNewDataList = (oldState : HomeModuleIntials, newData : [CardDataInterface]) => {
+    let newState = { data : newData};
     return newState;
 };
 
 const HOME_REDUCER = (state = initialState, action : actionsProps) => {
     const dataToUpdate : [CardDataInterface]     =  action.data;
     switch(action.type){
-        case HomeActions.setQuestionAnswers          :   return updateHomePageData(state, dataToUpdate);
+        case HomeActions.setQuestionAnswers          :   return appendPaginatedDataList(state, dataToUpdate);
+        case HomeActions.setNewQuestionAnswers       :   return setNewDataList(state, dataToUpdate);
         default : return state;
     }
 }
