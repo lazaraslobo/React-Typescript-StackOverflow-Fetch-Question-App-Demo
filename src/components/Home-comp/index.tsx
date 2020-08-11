@@ -42,12 +42,12 @@ class HomeComponent extends React.Component<CompProps, componentStateInterface>{
   }
 
   componentDidMount() {
-    this.props.getHomeScreenData(1, this.state.searchKeyWord);
+    // this.props.getHomeScreenData(1, this.state.searchKeyWord);
+    console.log("here ", this.props);
     window.addEventListener('scroll', this.scrollApiHandler);
   };
 
   scrollApiHandler = () =>{
-      console.log();
       if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight){
         return
       }else{
