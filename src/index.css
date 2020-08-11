@@ -16,6 +16,7 @@ body {
   color: black !important;
   box-shadow: 8px 4px 8px rgba(0,0,0,0.2), -8px 4px 12px rgba(0,0,0,0.1);
   cursor: pointer;
+  box-shadow: 1px 0px 10px 4px grey;
 }
 
 div{
@@ -76,4 +77,5 @@ th{
 
 .MuiPaper-root.MuiDialog-paper{
   width: 100%;
+  border-radius: 20px;
 }
