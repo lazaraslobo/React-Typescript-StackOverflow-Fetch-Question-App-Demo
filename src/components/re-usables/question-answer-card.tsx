@@ -4,20 +4,20 @@ import {options} from '../Grid'
 import {Grid} from '@material-ui/core';
 import {CardDataInterface} from '../data.comp.interfaces';
 
-interface interfaceBar{
+interface CardBoxDataInterface{
     iconName    :  string
     text        ?: string|number 
 }
 
-const CreateQaInfoBar = (barProps : interfaceBar) =>{
+const CreateQaInfoBar = (cardBoxProps : CardBoxDataInterface) =>{
     return (
         <Grid item xs={3} sm={3} md={4} lg={3} xl={3}>
             <Grid {...options.contRowStartCenter}>
                 <Grid item xs={3}>
-                    <span className="material-icons WT">{barProps.iconName}</span>
+                    <span className="material-icons WT">{cardBoxProps.iconName}</span>
                 </Grid>
                 <Grid item xs={3}>
-                    <RichText>{barProps.text}</RichText>
+                    <RichText>{cardBoxProps.text}</RichText>
                 </Grid>
             </Grid>
         </Grid>
