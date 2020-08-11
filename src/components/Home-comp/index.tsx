@@ -48,7 +48,10 @@ class HomeComponent extends React.Component<CompProps, componentStateInterface>{
         return
       }else{
         let elemLength = (document.getElementsByClassName("stackQACard").length / 20)+1;
-        props.getHomeScreenData(elemLength, "javascript");
+        if(!isApiFetching){
+          isApiFetching = true;
+          props.getHomeScreenData(elemLength, "javascript");
+        }
       }
     });
   }
@@ -115,10 +118,10 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 });
 
 const fetchQuestionAnswers = (dispatch: Dispatch, pagination : number, keyWord : string) => {
-  if(!isApiFetching)
-    isApiFetching = true;
-  else
-    return;
+  // if(!isApiFetching)
+  //   isApiFetching = true;
+  // else
+  //   return;
 
   return fetchAPI({url : API_MAP.paginationDataAPI(pagination, keyWord)}).then(data => {
     dispatch({ type: HomeActions.setQuestionAnswers, data: data });
@@ -128,10 +131,10 @@ const fetchQuestionAnswers = (dispatch: Dispatch, pagination : number, keyWord :
 }
 
 const fetchRelatedQuestionAnswers = (dispatch: Dispatch, keyWord : string) => {
-  if(!isApiFetching)
-    isApiFetching = true;
-  else
-    return;
+  // if(!isApiFetching)
+  //   isApiFetching = true;
+  // else
+  //   return;
 
   return fetchAPI({url : API_MAP.relatedKeyDataAPI(keyWord)}).then(data => {
     dispatch({ type: HomeActions.setNewQuestionAnswers, data: data });
