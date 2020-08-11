@@ -11,9 +11,13 @@ interface tablePropsInterface{
     onClickRow  :  (data : CardDataInterface) => void
 }
 
+const parseToInt = (index : string) =>{
+  return parseInt(index);
+}
+
 const parseDate = (crationDate : number) =>{
     let datePouch = crationDate.toString().replace(/.{2}/g, '$&,').split(',');
-    const utcDate2 = new Date(Date.UTC(parseInt(datePouch[0]), parseInt(datePouch[1], parseInt(datePouch[2], parseInt(datePouch[3], parseInt(datePouch[4], parseInt(datePouch[5])))))));
+    const utcDate2 = new Date(Date.UTC(parseToInt(datePouch[0]), parseToInt(datePouch[1]), parseToInt(datePouch[2]), parseToInt(datePouch[3]), parseToInt(datePouch[4]), parseToInt(datePouch[5])));
     let finalDate = utcDate2.toUTCString();
     return (finalDate.includes("Date") ? "--" : finalDate);
 }

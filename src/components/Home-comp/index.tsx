@@ -87,7 +87,7 @@ class HomeComponent extends React.Component<CompProps, componentStateInterface>{
                       {
                         this.props.HomeData.data.length ?
                           <TableView onClickRow={(data : CardDataInterface)=>this.openModal(data)} data={this.props.HomeData.data}/>
-                        : <h1>No Data ...</h1>
+                        : <h3>{!this.state.searchKeyWord.length ? "Search Something like - Javascript" : "No Data ..."}</h3>
                       }
                     </Grid>
                 <span className="scroller-element"></span>
