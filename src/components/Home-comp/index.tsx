@@ -39,7 +39,7 @@ class HomeComponent extends React.Component<CompProps, componentStateInterface>{
   }
 
   componentDidMount() {
-    this.props.getHomeScreenData(1, "javascript");
+    this.props.getHomeScreenData(1, "");
   };
 
   componentDidUpdate(props:CompProps){
@@ -63,8 +63,6 @@ class HomeComponent extends React.Component<CompProps, componentStateInterface>{
         <Grid {...options.contRowCenterStart}>
           <Grid item xs={12} sm={11} lg={10} md={10} xl={10}>
               <Grid {...options.contRowCenterStart}>
-                {
-                  // this.props.HomeData.data.length ?
                     <Grid item xs={12}>
                       <Grid {...options.contRowCenterStart}>
                         <Grid item xs={12} sm={8} md={6} lg={6} xl={6}>
@@ -75,13 +73,15 @@ class HomeComponent extends React.Component<CompProps, componentStateInterface>{
                               variant="outlined"
                               fullWidth={true}
                               onChange={this.handleSearchInput}
-                            />
+                              />
                         </Grid>
                       </Grid>
-                      <TableView onClickRow={(data : CardDataInterface)=>this.openModal(data)} data={this.props.HomeData.data}/>
+                      {
+                        this.props.HomeData.data.length ?
+                          <TableView onClickRow={(data : CardDataInterface)=>this.openModal(data)} data={this.props.HomeData.data}/>
+                        : <h1>No Data ...</h1>
+                      }
                     </Grid>
-                //   : <h1>Still Fetching ....</h1>
-                }
                 <span className="scroller-element"></span>
               </Grid>
           </Grid>
@@ -115,10 +115,10 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 });
 
 const fetchQuestionAnswers = (dispatch: Dispatch, pagination : number, keyWord : string) => {
-  if(!isApiFetching)
-    isApiFetching = true;
-  else
-    return;
+  // if(!isApiFetching)
+  //   isApiFetching = true;
+  // else
+  //   return;
 
   return fetchAPI({url : API_MAP.paginationDataAPI(pagination, keyWord)}).then(data => {
     dispatch({ type: HomeActions.setQuestionAnswers, data: data });
@@ -128,10 +128,10 @@ const fetchQuestionAnswers = (dispatch: Dispatch, pagination : number, keyWord :
 }
 
 const fetchRelatedQuestionAnswers = (dispatch: Dispatch, keyWord : string) => {
-  if(!isApiFetching)
-    isApiFetching = true;
-  else
-    return;
+  // if(!isApiFetching)
+  //   isApiFetching = true;
+  // else
+  //   return;
 
 
   return fetchAPI({url : API_MAP.relatedKeyDataAPI(keyWord)}).then(data => {
