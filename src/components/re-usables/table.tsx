@@ -7,7 +7,7 @@ import {CardDataInterface} from '../data.comp.interfaces';
 const TableWrapper = styled.table`width : 100%`;
 
 interface tablePropsInterface{
-    data            :   [],
+    data            :   CardDataInterface[],
     onClickRow  :  (data : CardDataInterface) => void
 }
 

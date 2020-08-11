@@ -16,7 +16,7 @@ import {API_MAP} from '../../core/api-service/api.map';
 
 type CompProps = {
   HomeData      : {
-    data  : []
+    data  : CardDataInterface[]
   };
   getHomeScreenData : (page : number, searchStr : string) => void;
   getRelatedData : (searchStr : string) => void;

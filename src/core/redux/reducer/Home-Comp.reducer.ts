@@ -19,16 +19,11 @@ const appendPaginatedDataList = (oldState : HomeModuleIntials, newData : CardDat
     return newState;
 };
 
-const setNewDataList = (oldState : HomeModuleIntials, newData : CardDataInterface[]) => {
-    let newState = { data : newData};
-    return newState;
-};
-
 const HOME_REDUCER = (state = initialState, action : actionsProps) => {
-    const dataToUpdate : CardDataInterface[]     =  action.data;
+    const dataToUpdate : CardDataInterface[]  =  action.data;
     switch(action.type){
         case HomeActions.setQuestionAnswers          :   return appendPaginatedDataList(state, dataToUpdate);
-        case HomeActions.setNewQuestionAnswers       :   return setNewDataList(state, dataToUpdate);
+        case HomeActions.setNewQuestionAnswers       :   return { data : dataToUpdate};;
         default : return state;
     }
 }
