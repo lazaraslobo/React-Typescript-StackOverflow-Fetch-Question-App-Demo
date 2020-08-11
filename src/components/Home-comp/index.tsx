@@ -42,8 +42,6 @@ class HomeComponent extends React.Component<CompProps, componentStateInterface>{
   }
 
   componentDidMount() {
-    // this.props.getHomeScreenData(1, this.state.searchKeyWord);
-    console.log("here ", this.props);
     window.addEventListener('scroll', this.scrollApiHandler);
   };
 
@@ -123,11 +121,6 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 });
 
 const fetchQuestionAnswers = (dispatch: Dispatch, pagination : number, keyWord : string) => {
-  // if(!isApiFetching)
-  //   isApiFetching = true;
-  // else
-  //   return;
-
   return fetchAPI({url : API_MAP.paginationDataAPI(pagination, keyWord)}).then(data => {
     dispatch({ type: HomeActions.setQuestionAnswers, data: data });
     isApiFetching = false;
@@ -136,11 +129,6 @@ const fetchQuestionAnswers = (dispatch: Dispatch, pagination : number, keyWord :
 }
 
 const fetchRelatedQuestionAnswers = (dispatch: Dispatch, keyWord : string) => {
-  // if(!isApiFetching)
-  //   isApiFetching = true;
-  // else
-  //   return;
-
   return fetchAPI({url : API_MAP.relatedKeyDataAPI(keyWord)}).then(data => {
     dispatch({ type: HomeActions.setNewQuestionAnswers, data: data });
     isApiFetching = false;
