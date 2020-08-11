@@ -43,41 +43,25 @@ class HomeComponent extends React.Component<CompProps, componentStateInterface>{
 
   componentDidMount() {
     this.props.getHomeScreenData(1, this.state.searchKeyWord);
-    const {getHomeScreenData} = this.props;
-    let self = this;
-    window.addEventListener('scroll', function(e) {
-      this.console.log();
+    window.addEventListener('scroll', this.scrollApiHandler);
+  };
+
+  scrollApiHandler = () =>{
+      console.log();
       if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight){
         return
       }else{
         let elemLength = (document.getElementsByClassName("stackQACard").length / 20)+1;
         if(!isApiFetching){
           isApiFetching = true;
-          getHomeScreenData(elemLength, self.state.searchKeyWord);
+          this.props.getHomeScreenData(elemLength, this.state.searchKeyWord);
         }
-      }
-    });
-  };
-
-  componentDidUpdate(props:any){
-    // console.log(props)
-    // window.addEventListener('scroll', function(e) {
-    //   if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight){
-    //     return
-    //   }else{
-    //     let elemLength = (document.getElementsByClassName("stackQACard").length / 20)+1;
-    //     if(!isApiFetching){
-    //       isApiFetching = true;
-    //       props.getHomeScreenData(elemLength, "");
-    //     }
-    //   }
-    // });
+    }
   }
 
   handleSearchInput = (event : React.ChangeEvent<HTMLInputElement>) =>{
     let inputval = {...this.state, searchKeyWord : event.target.value};
     this.setState(inputval);
-    // console.log("here ", this.state.searchKeyWord);
     this.props.getRelatedData(event.target.value);
   }
 
