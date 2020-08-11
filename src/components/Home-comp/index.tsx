@@ -115,10 +115,10 @@ const mapDispatchToProps = (dispatch: Dispatch) => ({
 });
 
 const fetchQuestionAnswers = (dispatch: Dispatch, pagination : number, keyWord : string) => {
-  // if(!isApiFetching)
-  //   isApiFetching = true;
-  // else
-  //   return;
+  if(!isApiFetching)
+    isApiFetching = true;
+  else
+    return;
 
   return fetchAPI({url : API_MAP.paginationDataAPI(pagination, keyWord)}).then(data => {
     dispatch({ type: HomeActions.setQuestionAnswers, data: data });
@@ -128,11 +128,10 @@ const fetchQuestionAnswers = (dispatch: Dispatch, pagination : number, keyWord :
 }
 
 const fetchRelatedQuestionAnswers = (dispatch: Dispatch, keyWord : string) => {
-  // if(!isApiFetching)
-  //   isApiFetching = true;
-  // else
-  //   return;
-
+  if(!isApiFetching)
+    isApiFetching = true;
+  else
+    return;
 
   return fetchAPI({url : API_MAP.relatedKeyDataAPI(keyWord)}).then(data => {
     dispatch({ type: HomeActions.setNewQuestionAnswers, data: data });
