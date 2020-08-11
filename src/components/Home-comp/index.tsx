@@ -25,6 +25,7 @@ type CompProps = {
 type componentStateInterface = {
   isModalOpen   : boolean;
   modalData     : CardDataInterface;
+  searchKeyWord : string;
 }
 
 let isApiFetching = false;
@@ -34,29 +35,49 @@ class HomeComponent extends React.Component<CompProps, componentStateInterface>{
     super(props);
     this.state = {
       isModalOpen   : false,
-      modalData     : CardDataInitial
+      modalData     : CardDataInitial,
+      searchKeyWord : ""
     }
+    this.handleSearchInput = this.handleSearchInput.bind(this);
   }
 
   componentDidMount() {
-    this.props.getHomeScreenData(1, "");
-  };
-
-  componentDidUpdate(props:CompProps){
+    this.props.getHomeScreenData(1, this.state.searchKeyWord);
+    const {getHomeScreenData} = this.props;
+    let self = this;
     window.addEventListener('scroll', function(e) {
+      this.console.log();
       if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight){
         return
       }else{
         let elemLength = (document.getElementsByClassName("stackQACard").length / 20)+1;
         if(!isApiFetching){
           isApiFetching = true;
-          props.getHomeScreenData(elemLength, "javascript");
+          getHomeScreenData(elemLength, self.state.searchKeyWord);
         }
       }
     });
+  };
+
+  componentDidUpdate(props:any){
+    // console.log(props)
+    // window.addEventListener('scroll', function(e) {
+    //   if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight){
+    //     return
+    //   }else{
+    //     let elemLength = (document.getElementsByClassName("stackQACard").length / 20)+1;
+    //     if(!isApiFetching){
+    //       isApiFetching = true;
+    //       props.getHomeScreenData(elemLength, "");
+    //     }
+    //   }
+    // });
   }
 
-  handleSearchInput = (event :  React.ChangeEvent<HTMLInputElement>) =>{
+  handleSearchInput = (event : React.ChangeEvent<HTMLInputElement>) =>{
+    let inputval = {...this.state, searchKeyWord : event.target.value};
+    this.setState(inputval);
+    // console.log("here ", this.state.searchKeyWord);
     this.props.getRelatedData(event.target.value);
   }
 
@@ -70,7 +91,7 @@ class HomeComponent extends React.Component<CompProps, componentStateInterface>{
                       <Grid {...options.contRowCenterStart}>
                         <Grid item xs={12} sm={8} md={6} lg={6} xl={6}>
                           <TextField
-                              id="outlined-name"
+                              id="search-value"
                               label="Search.."
                               margin="normal"
                               variant="outlined"
